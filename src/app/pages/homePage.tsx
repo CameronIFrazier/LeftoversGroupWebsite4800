@@ -91,7 +91,7 @@ export default function HomePage() {
     <BackgroundBeamsWithCollision className="min-h-screen bg-black text-white">
       <main className="relative z-10">
         {/* hero */}
-        <section className="pt-28 pb-20 text-center border-b border-white/10">
+        <section className="pt-36 md:pt-28 pb-20 text-center border-b border-white/10">
           <h1 className="mb-4 flex items-baseline justify-center">
             <Link href="/" className="text-5xl font-bold tracking-wide">
               <GradientText
@@ -219,7 +219,6 @@ export default function HomePage() {
                 smoothScrollToSection('links');
               }}
               className="p-[2px] relative"
-              title="View Resources"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-full" />
               <div className="px-6 py-2 bg-black rounded-full relative transition duration-200 text-purple-400 hover:bg-transparent hover:text-white text-sm">
@@ -232,7 +231,6 @@ export default function HomePage() {
                 smoothScrollToSection('directory');
               }}
               className="p-[2px] relative"
-              title="Meet the Team"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-full" />
               <div className="px-6 py-2 bg-black rounded-full relative transition duration-200 text-purple-400 hover:bg-transparent hover:text-white text-sm">
