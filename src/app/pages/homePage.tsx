@@ -4,7 +4,8 @@ import Link from "next/link";
 
 import React from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
-
+import GradientText from "@/components/ui/GradientText";
+import GradientBorder from "@/components/ui/GradientBorder";
 
 type StaffMember = {
   name: string;
@@ -49,6 +50,7 @@ const QUICK_LINKS: QuickLink[] = [
   },
 ];
 
+
 function getInitials(fullName: string): string {
   return fullName
     .trim()
@@ -77,29 +79,34 @@ export default function HomePage() {
   return (
     <BackgroundBeamsWithCollision className="min-h-screen bg-black text-white">
       <main className="relative z-10">
-        {/* navbar */}
-        <header className="sticky top-0 z-50 border-b border-white/20 bg-black/80 backdrop-blur-sm">
-          <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
-            <Link href="/" className="text-lg font-semibold tracking-wide">
-              TheLeftOvers Staff
-            </Link>
-            <nav className="flex items-center gap-6 text-sm">
-              <a className="hover:text-gray-300" onClick={() => smoothScrollToSection('links')}>
-                Resources
-              </a>
-              <a className="hover:text-gray-300" onClick={() => smoothScrollToSection('directory')} >
-                Staff Directory
-              </a>
-            </nav>
-          </div>
-        </header>
-
         {/* hero */}
-        <section className="py-20 text-center border-b border-white/10"> {/*hero border*/}
-          <h1 className="text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-b from-indigo-500 to-purple-500 bg-clip-text text-transparent">
-              Welcome to the Staff Portal
-            </span>
+        <section className="py-20 text-center border-b border-white/10">
+          {/* Brand logo/title at top of hero */}
+          {/* <div className="mb-8">
+            <Link href="/">
+              <GradientText
+                colors={["#f540ffff", "#ac40ffff", "#321e8fff", "#4079ff", "#f540ffff"]}
+                animationSpeed={4}
+                showBorder={false}
+                className="text-3xl font-semibold tracking-wide"
+              >
+                TheLeftOvers
+              </GradientText>
+            </Link>
+          </div> */}
+          
+          <h1 className="mb-4 flex items-baseline justify-center">
+            <Link href="/" className="text-5xl font-bold tracking-wide">
+              <GradientText
+                colors={["#f540ffff", "#ac40ffff", "#321e8fff", "#4079ff", "#f540ffff"]}
+                animationSpeed={4}
+                showBorder={false}
+                className="text-5xl font-bold tracking-wide"
+              >
+                TheLeftOvers
+              </GradientText>
+            </Link>
+            <span className="text-purple-400 text-3xl font-bold tracking-wide ml-2">Staff Page</span>
           </h1>
           <p className="text-purple-400 max-w-2xl mx-auto">
             Official Website for documentation, team info, and project collaboration.
@@ -113,7 +120,7 @@ export default function HomePage() {
               className="p-[3px] relative"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-lg" />
-              <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+              <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-purple-400 hover:bg-transparent hover:text-white">
                 View Resources
               </div>
             </button>
@@ -125,7 +132,7 @@ export default function HomePage() {
               className="p-[3px] relative"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-lg" />
-              <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+              <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-purple-400 hover:bg-transparent hover:text-white">
                 Meet the Team
               </div>
             </button>
@@ -141,19 +148,21 @@ export default function HomePage() {
             {QUICK_LINKS.map((item) => {
               const isExternal = item.href.startsWith("http");
               return (
-                <a
+                <GradientBorder
                   key={item.title}
+                  as="a"
                   href={item.href}
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noreferrer" : undefined}
-                  className="block bg-zinc-900 border border-white/10 p-6 rounded-lg hover:bg-zinc-800 transition"
                 >
-                  <div className="flex items-center gap-3 mb-2 text-lg">
-                    <span>{item.icon}</span>
-                    <h3 className="font-medium">{item.title}</h3>
+                  <div className="bg-zinc-900 p-6 rounded-md transition-colors duration-200 h-full hover:text-purple-400">
+                    <div className="flex items-center gap-3 mb-2 text-lg ">
+                      <span>{item.icon}</span>
+                      <h3 className="font-bold">{item.title}</h3>
+                    </div>
+                    <p className="text-sm text-gray-400">{item.desc}</p>
                   </div>
-                  <p className="text-sm text-gray-400">{item.desc}</p>
-                </a>
+                </GradientBorder>
               );
             })}
           </div>
@@ -162,27 +171,26 @@ export default function HomePage() {
         {/* staff dir */}
         <section id="directory" className="max-w-6xl mx-auto px-4 py-16">
           <h2 className="text-2xl font-semibold mb-2 bg-gradient-to-b from-indigo-500 to-purple-500 bg-clip-text text-transparent">Staff Directory</h2>
-          <p className="text-white-400 mb-8">Meet the developers behind Leftovers.</p>
+          <p className="text-purple-400 mb-8">Meet the developers behind Leftovers.</p>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {STAFF.map((member) => (
-              <div
-                key={member.name}
-                className="bg-zinc-900 border border-white/10 p-5 rounded-lg"
-              >
-                <div className="h-12 w-12 flex items-center justify-center bg-zinc-800 rounded-full mb-4 text-sm">
-                  {getInitials(member.name)}
+              <GradientBorder key={member.name}>
+                <div className="bg-zinc-900 p-5 rounded-md h-full">
+                  <div className="h-12 w-12 flex items-center justify-center bg-zinc-800 rounded-full mb-4 text-sm">
+                    {getInitials(member.name)}
+                  </div>
+                  <h3 className="font-semibold">{member.name}</h3>
+                  <p className="text-sm text-gray-400">{member.role}</p>
+                  {member.email && (
+                    <a
+                      href={`mailto:${member.email}`}
+                      className="text-xs text-gray-400 underline mt-2 block"
+                    >
+                      {member.email}
+                    </a>
+                  )}
                 </div>
-                <h3 className="font-semibold">{member.name}</h3>
-                <p className="text-sm text-gray-400">{member.role}</p>
-                {member.email && (
-                  <a
-                    href={`mailto:${member.email}`}
-                    className="text-xs text-gray-400 underline mt-2 block hover:text-white"
-                  >
-                    {member.email}
-                  </a>
-                )}
-              </div>
+              </GradientBorder>
             ))}
           </div>
         </section>
