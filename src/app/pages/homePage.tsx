@@ -77,7 +77,7 @@ function smoothScrollToSection(sectionId: string, headerOffset: number = 80) {
 
 export default function HomePage() {
   return (
-    <BackgroundBeamsWithCollision className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white">
       <main className="relative z-10">
         {/* hero */}
         <section className="py-20 text-center border-b border-white/10">
@@ -200,6 +200,6 @@ export default function HomePage() {
           © {new Date().getFullYear()} Leftovers. All Rights Reserved.
         </footer>
       </main>
-    </BackgroundBeamsWithCollision>
+    </div>
   );
 }
