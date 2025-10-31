@@ -88,7 +88,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <BackgroundBeamsWithCollision className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white">
       <main className="relative z-10">
         {/* hero */}
         <section className="pt-36 md:pt-28 pb-20 text-center border-b border-white/10">
@@ -240,6 +240,6 @@ export default function HomePage() {
           </div>
         </div>
       </main>
-    </BackgroundBeamsWithCollision>
+    </div>
   );
 }
