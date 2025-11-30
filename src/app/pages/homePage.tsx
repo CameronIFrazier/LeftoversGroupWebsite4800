@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-
-import React from "react";
+import React, { useEffect } from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import GradientText from "@/components/ui/GradientText";
 import GradientBorder from "@/components/ui/GradientBorder";
@@ -22,11 +21,11 @@ type QuickLink = {
 
 const STAFF: StaffMember[] = [
   { name: "Cameron Frazier", role: "CEO" },
-  { name: "Jimmy Thai", role: "Vice President" , email: "jimmythai1999@gmail.com" },
+  { name: "Jimmy Thai", role: "Vice President", email: "jimmythai1999@gmail.com" },
   { name: "Eric Lee", role: "Software Engineer", email: "ericjulee@gmail.com" },
-  { name: "Thuy An Nguyen", role: "UI/UX Developer", email: "99thuyannguyen@gmail.com"},
-  { name: "Anson Ng", role: "CTO", email: "ansonng778@gmail.com"}, 
-  { name: "Justin Fok", role: "Software Engineer", email: "jcfok@cpp.edu"},
+  { name: "Thuy An Nguyen", role: "UI/UX Developer", email: "99thuyannguyen@gmail.com" },
+  { name: "Anson Ng", role: "CTO", email: "ansonng778@gmail.com" },
+  { name: "Justin Fok", role: "Software Engineer", email: "jcfok@cpp.edu" },
 ];
 
 const QUICK_LINKS: QuickLink[] = [
@@ -75,26 +74,24 @@ function smoothScrollToSection(sectionId: string, headerOffset: number = 80) {
   }
 }
 
+function smoothScrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
 export default function HomePage() {
+  // Set page-specific title
+  useEffect(() => {
+    document.title = "TheLeftOvers Staff page";
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-white">
       <main className="relative z-10">
         {/* hero */}
-        <section className="py-20 text-center border-b border-white/10">
-          {/* Brand logo/title at top of hero */}
-          {/* <div className="mb-8">
-            <Link href="/">
-              <GradientText
-                colors={["#f540ffff", "#ac40ffff", "#321e8fff", "#4079ff", "#f540ffff"]}
-                animationSpeed={4}
-                showBorder={false}
-                className="text-3xl font-semibold tracking-wide"
-              >
-                TheLeftOvers
-              </GradientText>
-            </Link>
-          </div> */}
-          
+        <section className="pt-36 md:pt-28 pb-20 text-center border-b border-white/10">
           <h1 className="mb-4 flex items-baseline justify-center">
             <Link href="/" className="text-5xl font-bold tracking-wide">
               <GradientText
@@ -111,7 +108,7 @@ export default function HomePage() {
           <p className="text-purple-400 max-w-2xl mx-auto">
             Official Website for documentation, team info, and project collaboration.
           </p>
-          <div className="mt-8 flex justify-center gap-4">
+          {/* <div className="mt-8 flex justify-center gap-4">
             <button 
               onClick={(e) => {
                 e.preventDefault();
@@ -120,7 +117,7 @@ export default function HomePage() {
               className="p-[3px] relative"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-lg" />
-              <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-purple-400 hover:bg-transparent hover:text-white">
+              <div className="px-8 py-2  bg-black rounded-[15px]  relative group transition duration-200 text-purple-400 hover:bg-transparent hover:text-white">
                 View Resources
               </div>
             </button>
@@ -132,12 +129,12 @@ export default function HomePage() {
               className="p-[3px] relative"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-lg" />
-              <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-purple-400 hover:bg-transparent hover:text-white">
+              <div className="px-8 py-2  bg-black rounded-[15px]  relative group transition duration-200 text-purple-400 hover:bg-transparent hover:text-white">
                 Meet the Team
               </div>
             </button>
           
-          </div>
+          </div> */}
         </section>
 
         {/* quick links */}
@@ -155,10 +152,10 @@ export default function HomePage() {
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noreferrer" : undefined}
                 >
-                  <div className="bg-zinc-900 p-6 rounded-md transition-colors duration-200 h-full hover:text-purple-400">
-                    <div className="flex items-center gap-3 mb-2 text-lg ">
-                      <span>{item.icon}</span>
-                      <h3 className="font-bold">{item.title}</h3>
+                  <div className="bg-zinc-900 p-6 rounded-md transition-colors duration-200 h-full group">
+                    <div className="flex items-center gap-3 mb-2 text-lg">
+                      <span className="transition-colors duration-200 group-hover:text-purple-400">{item.icon}</span>
+                      <h3 className="font-bold transition-colors duration-200 group-hover:text-purple-400">{item.title}</h3>
                     </div>
                     <p className="text-sm text-gray-400">{item.desc}</p>
                   </div>
@@ -175,8 +172,8 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {STAFF.map((member) => (
               <GradientBorder key={member.name}>
-                <div className="bg-zinc-900 p-5 rounded-md h-full">
-                  <div className="h-12 w-12 flex items-center justify-center bg-zinc-800 rounded-full mb-4 text-sm">
+                <div className="bg-zinc-900 p-5 rounded-md h-full group">
+                  <div className="h-12 w-12 flex items-center justify-center bg-zinc-800 rounded-full mb-4 text-sm transition-colors duration-200 group-hover:bg-purple-500 group-hover:text-white">
                     {getInitials(member.name)}
                   </div>
                   <h3 className="font-semibold">{member.name}</h3>
@@ -184,7 +181,7 @@ export default function HomePage() {
                   {member.email && (
                     <a
                       href={`mailto:${member.email}`}
-                      className="text-xs text-gray-400 underline mt-2 block"
+                      className="text-xs text-gray-400 underline mt-2 block hover:text-purple-400 transition-colors duration-200"
                     >
                       {member.email}
                     </a>
@@ -199,6 +196,49 @@ export default function HomePage() {
         <footer className="border-t border-white/10 py-6 text-center text-sm text-gray-500">
           © {new Date().getFullYear()} Leftovers. All Rights Reserved.
         </footer>
+
+        {/* Floating Navigation */}
+        <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
+          <div className="flex items-center gap-3 bg-black/80 backdrop-blur-md rounded-full px-4 py-3 shadow-lg">
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollToTop();
+              }}
+              className="p-[2px] relative group"
+              title="Back to top"
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+              <div className="w-10 h-10 bg-black/80 rounded-full flex items-center justify-center text-purple-400 text-lg font-bold group-hover:bg-transparent group-hover:text-white transition-all duration-200 relative z-10">
+                <span className="mt-[5px]">⌃</span>
+              </div>
+            </button>
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollToSection('links');
+              }}
+              className="p-[2px] relative"
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-full" />
+              <div className="px-6 py-2 bg-black rounded-full relative transition duration-200 text-purple-400 hover:bg-transparent hover:text-white text-sm">
+                View Resources
+              </div>
+            </button>
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                smoothScrollToSection('directory');
+              }}
+              className="p-[2px] relative"
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-purple-500 to-indigo-500 rounded-full" />
+              <div className="px-6 py-2 bg-black rounded-full relative transition duration-200 text-purple-400 hover:bg-transparent hover:text-white text-sm">
+                Meet the Team
+              </div>
+            </button>
+          </div>
+        </div>
       </main>
     </div>
   );
